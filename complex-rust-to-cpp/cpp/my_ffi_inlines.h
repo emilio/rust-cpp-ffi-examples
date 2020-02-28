@@ -57,7 +57,8 @@ OwnedSlice<T>::OwnedSlice(const OwnedSlice& other) : OwnedSlice() {
 
 template <typename T>
 OwnedSlice<T>& OwnedSlice<T>::operator=(const OwnedSlice& other) {
-  CopyFrom(other);
+  if (this != &other)
+    CopyFrom(other);
   return *this;
 }
 
