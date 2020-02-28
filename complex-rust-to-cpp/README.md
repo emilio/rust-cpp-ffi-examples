@@ -5,4 +5,5 @@ data-structures to C++ seamlessly.
 
 It uses C++20 because I didn't want to write my own `span<T>` :-)
 
-(TODO: Link to the post)
+I wrote a [blog post explaining
+it](https://crisal.io/words/2020/02/28/C++-rust-ffi-patterns-1-complex-data-structures.html).
