@@ -1,0 +1,47 @@
+autogen_warning = "/* DO NOT MODIFY MANUALLY, see build.rs, and cbindgen.toml */"
+include_guard = "my_ffi_h"
+namespaces = ["my_ffi"]
+trailer = """
+#include "my_ffi_inlines.h"
+"""
+includes = ["my_ffi_forwards.h"]
+
+[struct]
+derive_eq = true
+derive_neq = true
+
+[enum]
+derive_helper_methods = true
+derive_const_casts = true
+derive_tagged_enum_destructor = true
+derive_tagged_enum_copy_constructor = true
+derive_tagged_enum_copy_assignment = true
+private_default_tagged_enum_constructor = true
+cast_assert_name = "assert"
+
+[export.body]
+"OwnedSlice" = """
+  inline void Clear();
+  inline void CopyFrom(const OwnedSlice&);
+
+  // cpp shenanigans.
+  inline OwnedSlice();
+  inline ~OwnedSlice();
+  inline OwnedSlice(const OwnedSlice&);
+  inline OwnedSlice& operator=(const OwnedSlice&);
+
+  std::span<T> AsSpan() {
+    return { ptr, len };
+  }
+
+  inline std::span<const T> AsSpan() const {
+    return { ptr, len };
+  }
+
+  bool IsEmpty() {
+    return AsSpan().empty();
+  }
+
+  inline bool operator==(const OwnedSlice&) const;
+  inline bool operator!=(const OwnedSlice&) const;
+"""

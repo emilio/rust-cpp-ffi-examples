@@ -1,0 +1,13 @@
+[package]
+name = "complex-rust-to-cpp"
+version = "0.1.0"
+authors = ["Emilio Cobos Álvarez <emilio@crisal.io>"]
+edition = "2018"
+
+[build-dependencies]
+cbindgen = "0.13"
+cc = "1.0"
+log = "0.4"
+env_logger = "0.7"
+
+[dependencies]
